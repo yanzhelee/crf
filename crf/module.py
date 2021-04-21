@@ -16,9 +16,7 @@ class CRF(nn.Module):
         self.STOP_TAG = self.tagset_size - 1
         # Matrix of transition parameters.  Entry i,j is the score of
         # transitioning *to* i *from* j.
-        self.transitions = nn.Parameter(
-            torch.randn(self.tagset_size, self.tagset_size))
-
+        self.transitions = nn.Parameter(torch.randn(self.tagset_size, self.tagset_size))
         # These two statements enforce the constraint that we never transfer
         # to the start tag and we never transfer from the stop tag
         self.transitions.data[self.START_TAG, :] = -10000
@@ -81,8 +79,7 @@ class CRF(nn.Module):
         score = torch.zeros(1)
         tags = torch.cat([torch.tensor([self.START_TAG], dtype=torch.long), tags])
         for i, feat in enumerate(feats):
-            score = score + \
-                    self.transitions[tags[i + 1], tags[i]] + feat[tags[i + 1]]
+            score = score + self.transitions[tags[i + 1], tags[i]] + feat[tags[i + 1]]
         score = score + self.transitions[self.STOP_TAG, tags[-1]]
         return score
 
@@ -186,6 +183,7 @@ if __name__ == "__main__":
         :return:
         """
         return torch.tensor([tag2idx[tag] for tag in tags])
+
 
     # MODEL
     class Model(nn.Module):
