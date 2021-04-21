@@ -129,7 +129,7 @@ class CRF(nn.Module):
 
     def loss(self, sentence, tags):
         """
-        :param sentence: a torch tensor of size (n, d) where n is sentence length, d is dimension
+        :param sentence: a torch tensor of size (n, d) where n is sentence length, d = num_tags + 2 (including start and stop tags)
         :param tags: a tensor of size (n,) where n is sentence length = number of tags. tags are in the set {0, 1, ..., num_tags-1}
         :return: neg_log_likelihood
         """
