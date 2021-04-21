@@ -4,6 +4,11 @@ from torch import nn, optim
 
 class CRF(nn.Module):
     def __init__(self, num_tags: int = 1):
+        """
+        conditional random field - pytorch module
+        inspired by https://pytorch.org/tutorials/beginner/nlp/advanced_tutorial.html
+        :param num_tags: number of tags
+        """
         super(CRF, self).__init__()
         self.tagset_size = num_tags + 2
         # set START_TAG and STOP_TAG to the last two tags
